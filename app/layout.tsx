@@ -1,6 +1,10 @@
+
 import type { Metadata } from "next";
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter'
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from '@mui/material';
+import theme from '@/lib/theme';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -18,11 +22,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${inter.variable} antialiased`}
-      >
-        {children}
+    <html lang='en'>
+      <body className={`${inter.variable} antialiased`}>
+        <AppRouterCacheProvider>
+          <ThemeProvider theme={theme}>
+            {children}
+          </ThemeProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );
