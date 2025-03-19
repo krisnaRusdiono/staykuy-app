@@ -1,13 +1,22 @@
 'use client'
 
+import formatDate from '@/helpers/formatDate';
+import createQueryParams from '@/utils/createQueryParams';
 import { ArrowBackIos } from '@mui/icons-material';
 import { Button, List, ListItem, ListItemButton, ListItemText, TextField, Typography } from '@mui/material';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function Home() {
+  const router = useRouter();
   const [openHistory, setOpenHistory] = useState<boolean>(false);
 
   const toggleOpenHistory = () => setOpenHistory(!openHistory);
+
+  const onClickSearch = () => {
+    const queryString = createQueryParams({ destination: 'bandung', date: formatDate(new Date()), visitor: 4 })
+    router.push(`search-result?${queryString}`)
+  }
 
   return (
     <div
@@ -52,6 +61,7 @@ export default function Home() {
               <Button
                 variant='contained'
                 className='h-14 text-nowrap w-40 self-end !rounded-2xl'
+                onClick={onClickSearch}
               >
                 Cari Hotel
               </Button>

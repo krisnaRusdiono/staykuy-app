@@ -7,10 +7,10 @@ export interface AppContainerProps {
 
 const AppContainer = ({ children, className }: AppContainerProps) => {
     return (
-        <div className={`${className} container mx-auto`}>
-            {children}
-        </div>
-    )
+      <div className={`${className} container mx-auto`}>
+        {children}
+      </div>
+    );
 }
 
 export default AppContainer;
