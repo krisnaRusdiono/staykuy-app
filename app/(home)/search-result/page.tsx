@@ -12,8 +12,10 @@ import icLaundry from '@/public/svg/ic_laundry.svg';
 import icReceptionist from '@/public/svg/ic_receptionist.svg';
 import icSpa from '@/public/svg/ic_spa.svg';
 import icSwimmingPool from '@/public/svg/ic_swimming_pool.svg';
+import { useRouter } from 'next/navigation';
 
 const SearchResultPage = () => {
+    const router = useRouter();
     const [valuePrice, setValuePrice] = useState<number[]>([200000, 90000000]);
 
     const handleValuePriceChange = (
@@ -29,6 +31,10 @@ const SearchResultPage = () => {
 
     const priceLabelFormat = (value: number) => {
         return `IDR ${formatCurrency(value)}`;
+    }
+
+    const handleClickDetail = () => {
+      router.push('/detail/hotel-id')
     }
 
     return (
@@ -160,11 +166,15 @@ const SearchResultPage = () => {
               </div>
             </div>
             <div className='w-full flex flex-col gap-8'>
-              <div className="flex items-baseline gap-2">
+              <div className='flex items-baseline gap-2'>
                 <Typography variant='h6' className='!font-semibold'>
                   Hasil Pencarian
                 </Typography>
-                <Typography variant='caption' color="textDisabled" className='italic'>
+                <Typography
+                  variant='caption'
+                  color='textDisabled'
+                  className='italic'
+                >
                   9999 Hotel Ditemukan
                 </Typography>
               </div>
@@ -181,9 +191,11 @@ const SearchResultPage = () => {
                       }}
                     />
                     <div className='w-full p-4 pl-0 flex flex-col gap-2'>
-                      <Typography variant='body1' className='!font-semibold'>
-                        Hilton Garden Inn
-                      </Typography>
+                      <Button variant="text" disableRipple className='!p-0 w-fit' onClick={handleClickDetail}>
+                        <Typography variant='body1' className='!font-semibold'>
+                          Hilton Garden Inn
+                        </Typography>
+                      </Button>
                       <div className='flex gap-2'>
                         {new Array(5).fill(null).map((_, i) => (
                           <Image src={starIcon} width={17} alt='star' key={i} />
