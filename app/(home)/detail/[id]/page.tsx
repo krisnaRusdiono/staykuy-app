@@ -1,7 +1,10 @@
 import Detail from '@/views/Detail';
+import { Suspense } from 'react';
 
 const DetailPage = () => (
-  <Detail />
+  <Suspense fallback={<div>Loading</div>}>
+    <Detail />
+  </Suspense>
 )
 
 export default DetailPage;
