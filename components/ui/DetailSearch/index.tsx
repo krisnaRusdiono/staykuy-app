@@ -29,7 +29,7 @@ const DetailSearch = () => {
     
     return (
       <div className='w-full bg-white rounded-md flex justify-between items-center gap-4 px-4 py-6 drop-shadow-lg border border-solid border-neutral-100'>
-        <div className='w-full flex gap-4'>
+        <div className='w-full flex flex-col md:flex-row gap-0 md:gap-4'>
           <div className='flex flex-col justify-between h-inherit'>
             <Typography variant='body2'>Kota/Nama Hotel/ Destinasi</Typography>
             <Typography variant='body1' className='!font-semibold'>
