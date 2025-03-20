@@ -185,14 +185,14 @@ const SearchResult = () => {
                         <Image src={starIcon} width={17} alt='star' key={i} />
                       ))}
                     </div>
-                    <div className='flex gap-2 items-center items-center'>
+                    <div className='flex gap-2 items-center'>
                       <Image src={pinMarker} alt='pin map' width={14} />
                       <Typography variant='caption'>
                         Jl. Taman Palem Lestari No.1 Blok B13, West Cengkareng,
                         Cengkareng, West Jakarta City, Jakarta 11730
                       </Typography>
                     </div>
-                    <div className='flex gap-2 items-center items-center'>
+                    <div className='flex gap-2 items-center'>
                       <Image src={icLaundry} alt='pin map' width={20} />
                       <Image src={icSwimmingPool} alt='pin map' width={20} />
                       <Image src={icReceptionist} alt='pin map' width={20} />
