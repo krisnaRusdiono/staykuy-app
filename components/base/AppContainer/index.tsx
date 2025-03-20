@@ -7,7 +7,7 @@ export interface AppContainerProps {
 
 const AppContainer = ({ children, className }: AppContainerProps) => {
     return (
-      <div className={`${className} container mx-auto`}>
+      <div className={`${className} container mx-auto p-4`}>
         {children}
       </div>
     );

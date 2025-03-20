@@ -28,93 +28,99 @@ const SearchResult = () => {
     <AppContainer className='flex flex-col gap-4 py-4'>
       <div className='flex flex-col gap-8 h-auto min-h-screen pt-20'>
         <DetailSearch />
-        <div className='flex gap-8'>
-          <div className='min-w-72 rounded-xl drop-shadow-lg p-4 bg-white flex flex-col gap-4 h-fit'>
-            <Typography>Filter Pencarian</Typography>
-            <div>
-              <Typography>Bintang Hotel</Typography>
-              <div className='flex gap-2 items-center'>
-                <Checkbox value={1} classes={{ root: '!px-0 !py-1' }} />
-                <div className='flex gap-2 items-center'>
-                  <Image src={starIcon} width={17} alt='star' />
+        <div className='flex flex-wrap lg:flex-nowrap gap-8'>
+          <div className='min-w-72 w-full lg:w-fit rounded-xl drop-shadow-lg p-4 bg-white flex flex-col gap-4 h-fit'>
+            <div className='flex lg:flex-col gap-4 flex-wrap lg:flex-nowrap justify-around'>
+              <div className='w-full'>
+                <Typography>Filter Pencarian</Typography>
+                <div>
+                  <Typography>Bintang Hotel</Typography>
+                  <div className='flex gap-2 items-center'>
+                    <Checkbox value={1} classes={{ root: '!px-0 !py-1' }} />
+                    <div className='flex gap-2 items-center'>
+                      <Image src={starIcon} width={17} alt='star' />
+                    </div>
+                  </div>
+                  <div className='flex gap-2 items-center'>
+                    <Checkbox value={2} classes={{ root: '!px-0 !py-1' }} />
+                    <div className='flex gap-2 items-center'>
+                      <Image src={starIcon} width={17} alt='star' />
+                      <Image src={starIcon} width={17} alt='star' />
+                    </div>
+                  </div>
+                  <div className='flex gap-2 items-center'>
+                    <Checkbox value={3} classes={{ root: '!px-0 !py-1' }} />
+                    <div className='flex gap-2 items-center'>
+                      <Image src={starIcon} width={17} alt='star' />
+                      <Image src={starIcon} width={17} alt='star' />
+                      <Image src={starIcon} width={17} alt='star' />
+                    </div>
+                  </div>
+                  <div className='flex gap-2 items-center'>
+                    <Checkbox value={4} classes={{ root: '!px-0 !py-1' }} />
+                    <div className='flex gap-2 items-center'>
+                      <Image src={starIcon} width={17} alt='star' />
+                      <Image src={starIcon} width={17} alt='star' />
+                      <Image src={starIcon} width={17} alt='star' />
+                      <Image src={starIcon} width={17} alt='star' />
+                    </div>
+                  </div>
+                  <div className='flex gap-2 items-center'>
+                    <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
+                    <div className='flex gap-2 items-center'>
+                      <Image src={starIcon} width={17} alt='star' />
+                      <Image src={starIcon} width={17} alt='star' />
+                      <Image src={starIcon} width={17} alt='star' />
+                      <Image src={starIcon} width={17} alt='star' />
+                      <Image src={starIcon} width={17} alt='star' />
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className='flex gap-2 items-center'>
-                <Checkbox value={2} classes={{ root: '!px-0 !py-1' }} />
-                <div className='flex gap-2 items-center'>
-                  <Image src={starIcon} width={17} alt='star' />
-                  <Image src={starIcon} width={17} alt='star' />
+              <Divider />
+              <div className='w-full'>
+                <Typography>Fasilitas</Typography>
+                <div>
+                  <div
+                    className={`${
+                      expandFilterFacility ? 'h-44' : 'h-24'
+                    } overflow-hidden transition-all duration-300`}
+                  >
+                    <div className='flex gap-2 items-center'>
+                      <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
+                      <Typography>Kolam Renang</Typography>
+                    </div>
+                    <div className='flex gap-2 items-center'>
+                      <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
+                      <Typography>Parkir Gratis</Typography>
+                    </div>
+                    <div className='flex gap-2 items-center'>
+                      <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
+                      <Typography>Pusat Kebugaran</Typography>
+                    </div>
+                    <div className='flex gap-2 items-center'>
+                      <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
+                      <Typography>SPA</Typography>
+                    </div>
+                    <div className='flex gap-2 items-center'>
+                      <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
+                      <Typography>Cuci Gratis</Typography>
+                    </div>
+                  </div>
+                  <Button
+                    variant='text'
+                    className='!p-0 !normal-case'
+                    disableRipple
+                    onClick={toggleExpandFilterFacility}
+                  >
+                    {`${
+                      !expandFilterFacility
+                        ? '+ Tampilkan lebih banyak'
+                        : 'Sembunyikan'
+                    }`}
+                  </Button>
                 </div>
               </div>
-              <div className='flex gap-2 items-center'>
-                <Checkbox value={3} classes={{ root: '!px-0 !py-1' }} />
-                <div className='flex gap-2 items-center'>
-                  <Image src={starIcon} width={17} alt='star' />
-                  <Image src={starIcon} width={17} alt='star' />
-                  <Image src={starIcon} width={17} alt='star' />
-                </div>
-              </div>
-              <div className='flex gap-2 items-center'>
-                <Checkbox value={4} classes={{ root: '!px-0 !py-1' }} />
-                <div className='flex gap-2 items-center'>
-                  <Image src={starIcon} width={17} alt='star' />
-                  <Image src={starIcon} width={17} alt='star' />
-                  <Image src={starIcon} width={17} alt='star' />
-                  <Image src={starIcon} width={17} alt='star' />
-                </div>
-              </div>
-              <div className='flex gap-2 items-center'>
-                <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
-                <div className='flex gap-2 items-center'>
-                  <Image src={starIcon} width={17} alt='star' />
-                  <Image src={starIcon} width={17} alt='star' />
-                  <Image src={starIcon} width={17} alt='star' />
-                  <Image src={starIcon} width={17} alt='star' />
-                  <Image src={starIcon} width={17} alt='star' />
-                </div>
-              </div>
-            </div>
-            <Divider />
-            <Typography>Fasilitas</Typography>
-            <div>
-              <div
-                className={`${
-                  expandFilterFacility ? 'h-fit' : 'h-24'
-                } overflow-hidden transition-all duration-300`}
-              >
-                <div className='flex gap-2 items-center'>
-                  <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
-                  <Typography>Kolam Renang</Typography>
-                </div>
-                <div className='flex gap-2 items-center'>
-                  <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
-                  <Typography>Parkir Gratis</Typography>
-                </div>
-                <div className='flex gap-2 items-center'>
-                  <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
-                  <Typography>Pusat Kebugaran</Typography>
-                </div>
-                <div className='flex gap-2 items-center'>
-                  <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
-                  <Typography>SPA</Typography>
-                </div>
-                <div className='flex gap-2 items-center'>
-                  <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
-                  <Typography>Cuci Gratis</Typography>
-                </div>
-              </div>
-              <Button
-                variant='text'
-                className='!p-0 !normal-case'
-                disableRipple
-                onClick={toggleExpandFilterFacility}
-              >
-                {`${
-                  !expandFilterFacility
-                    ? '+ Tampilkan lebih banyak'
-                    : 'Sembunyikan'
-                }`}
-              </Button>
             </div>
             <Divider />
             <div>
@@ -153,14 +159,16 @@ const SearchResult = () => {
               {new Array(8).fill(null).map((_, i) => (
                 <div
                   key={i}
-                  className='flex gap-6 bg-white rounded-2xl drop-shadow-lg overflow-hidden transition-all hover:drop-shadow-xl'
+                  className='flex gap-6 bg-white rounded-2xl drop-shadow-lg overflow-hidden transition-all hover:drop-shadow-xl hover:[&>:first-child>div]:scale-110'
                 >
-                  <div
-                    className='w-96 bg-center bg-cover bg-no-repeat'
-                    style={{
-                      backgroundImage: "url('/images/product-thumbnail.jpg')",
-                    }}
-                  />
+                  <div className='w-96 h-full overflow-hidden flex'>
+                    <div
+                      className='w-96 bg-center bg-cover bg-no-repeat transition-all duration-300'
+                      style={{
+                        backgroundImage: "url('/images/product-thumbnail.jpg')",
+                      }}
+                    />
+                  </div>
                   <div className='w-full p-4 pl-0 flex flex-col gap-2'>
                     <Button
                       variant='text'
@@ -191,7 +199,7 @@ const SearchResult = () => {
                       <Image src={icGym} alt='pin map' width={20} />
                       <Image src={icSpa} alt='pin map' width={20} />
                     </div>
-                    <div className='flex gap-2 items-center items-center'>
+                    <div className='flex gap-2 items-center'>
                       <Button
                         variant='contained'
                         className='!rounded-2xl !normal-case italic'
@@ -207,7 +215,7 @@ const SearchResult = () => {
                         Bisa reschedule
                       </Button>
                     </div>
-                    <div className='flex gap-2 items-center justify-end items-baseline'>
+                    <div className='flex gap-2 justify-end items-baseline'>
                       <Typography
                         color='primary'
                         variant='h6'
