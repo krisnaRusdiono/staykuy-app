@@ -20,6 +20,8 @@ const SearchResult = () => {
     renderValuePrice,
     priceLabelFormat,
     handleClickDetail,
+    expandFilterFacility,
+    toggleExpandFilterFacility,
   } = useSearchResult();
 
   return (
@@ -31,39 +33,39 @@ const SearchResult = () => {
             <Typography>Filter Pencarian</Typography>
             <div>
               <Typography>Bintang Hotel</Typography>
-              <div className='flex gap-2'>
+              <div className='flex gap-2 items-center'>
                 <Checkbox value={1} classes={{ root: '!px-0 !py-1' }} />
-                <div className='flex gap-2'>
+                <div className='flex gap-2 items-center'>
                   <Image src={starIcon} width={17} alt='star' />
                 </div>
               </div>
-              <div className='flex gap-2'>
+              <div className='flex gap-2 items-center'>
                 <Checkbox value={2} classes={{ root: '!px-0 !py-1' }} />
-                <div className='flex gap-2'>
+                <div className='flex gap-2 items-center'>
                   <Image src={starIcon} width={17} alt='star' />
                   <Image src={starIcon} width={17} alt='star' />
                 </div>
               </div>
-              <div className='flex gap-2'>
+              <div className='flex gap-2 items-center'>
                 <Checkbox value={3} classes={{ root: '!px-0 !py-1' }} />
-                <div className='flex gap-2'>
+                <div className='flex gap-2 items-center'>
                   <Image src={starIcon} width={17} alt='star' />
                   <Image src={starIcon} width={17} alt='star' />
                   <Image src={starIcon} width={17} alt='star' />
                 </div>
               </div>
-              <div className='flex gap-2'>
+              <div className='flex gap-2 items-center'>
                 <Checkbox value={4} classes={{ root: '!px-0 !py-1' }} />
-                <div className='flex gap-2'>
+                <div className='flex gap-2 items-center'>
                   <Image src={starIcon} width={17} alt='star' />
                   <Image src={starIcon} width={17} alt='star' />
                   <Image src={starIcon} width={17} alt='star' />
                   <Image src={starIcon} width={17} alt='star' />
                 </div>
               </div>
-              <div className='flex gap-2'>
+              <div className='flex gap-2 items-center'>
                 <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
-                <div className='flex gap-2'>
+                <div className='flex gap-2 items-center'>
                   <Image src={starIcon} width={17} alt='star' />
                   <Image src={starIcon} width={17} alt='star' />
                   <Image src={starIcon} width={17} alt='star' />
@@ -73,30 +75,45 @@ const SearchResult = () => {
               </div>
             </div>
             <Divider />
-            <Typography>Filter Pencarian</Typography>
+            <Typography>Fasilitas</Typography>
             <div>
-              <div className='flex gap-2'>
-                <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
-                <Typography>Kolam Renang</Typography>
+              <div
+                className={`${
+                  expandFilterFacility ? 'h-fit' : 'h-24'
+                } overflow-hidden transition-all duration-300`}
+              >
+                <div className='flex gap-2 items-center'>
+                  <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
+                  <Typography>Kolam Renang</Typography>
+                </div>
+                <div className='flex gap-2 items-center'>
+                  <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
+                  <Typography>Parkir Gratis</Typography>
+                </div>
+                <div className='flex gap-2 items-center'>
+                  <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
+                  <Typography>Pusat Kebugaran</Typography>
+                </div>
+                <div className='flex gap-2 items-center'>
+                  <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
+                  <Typography>SPA</Typography>
+                </div>
+                <div className='flex gap-2 items-center'>
+                  <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
+                  <Typography>Cuci Gratis</Typography>
+                </div>
               </div>
-              <div className='flex gap-2'>
-                <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
-                <Typography>Parkir Gratis</Typography>
-              </div>
-              <div className='flex gap-2'>
-                <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
-                <Typography>Pusat Kebugaran</Typography>
-              </div>
-              <div className='flex gap-2'>
-                <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
-                <Typography>SPA</Typography>
-              </div>
-              <div className='flex gap-2'>
-                <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
-                <Typography>Cuci Gratis</Typography>
-              </div>
-              <Button variant='text' className='!p-0'>
-                + Tampilkan lebih banyak
+              <Button
+                variant='text'
+                className='!p-0 !normal-case'
+                disableRipple
+                onClick={toggleExpandFilterFacility}
+              >
+                {`${
+                  !expandFilterFacility
+                    ? '+ Tampilkan lebih banyak'
+                    : 'Sembunyikan'
+                }`}
               </Button>
             </div>
             <Divider />
@@ -119,7 +136,7 @@ const SearchResult = () => {
               </div>
             </div>
           </div>
-          <div className='w-full flex flex-col gap-8'>
+          <div className='w-full flex flex-col gap-6'>
             <div className='flex items-baseline gap-2'>
               <Typography variant='h6' className='!font-semibold'>
                 Hasil Pencarian
@@ -136,7 +153,7 @@ const SearchResult = () => {
               {new Array(8).fill(null).map((_, i) => (
                 <div
                   key={i}
-                  className='flex gap-6 bg-white rounded-2xl drop-shadow-lg overflow-hidden'
+                  className='flex gap-6 bg-white rounded-2xl drop-shadow-lg overflow-hidden transition-all hover:drop-shadow-xl'
                 >
                   <div
                     className='w-96 bg-center bg-cover bg-no-repeat'
@@ -155,26 +172,26 @@ const SearchResult = () => {
                         Hilton Garden Inn
                       </Typography>
                     </Button>
-                    <div className='flex gap-2'>
+                    <div className='flex gap-2 items-center'>
                       {new Array(5).fill(null).map((_, i) => (
                         <Image src={starIcon} width={17} alt='star' key={i} />
                       ))}
                     </div>
-                    <div className='flex gap-2 items-center'>
+                    <div className='flex gap-2 items-center items-center'>
                       <Image src={pinMarker} alt='pin map' width={14} />
                       <Typography variant='caption'>
                         Jl. Taman Palem Lestari No.1 Blok B13, West Cengkareng,
                         Cengkareng, West Jakarta City, Jakarta 11730
                       </Typography>
                     </div>
-                    <div className='flex gap-2 items-center'>
+                    <div className='flex gap-2 items-center items-center'>
                       <Image src={icLaundry} alt='pin map' width={20} />
                       <Image src={icSwimmingPool} alt='pin map' width={20} />
                       <Image src={icReceptionist} alt='pin map' width={20} />
                       <Image src={icGym} alt='pin map' width={20} />
                       <Image src={icSpa} alt='pin map' width={20} />
                     </div>
-                    <div className='flex gap-2 items-center'>
+                    <div className='flex gap-2 items-center items-center'>
                       <Button
                         variant='contained'
                         className='!rounded-2xl !normal-case italic'
@@ -190,7 +207,7 @@ const SearchResult = () => {
                         Bisa reschedule
                       </Button>
                     </div>
-                    <div className='flex gap-2 justify-end items-baseline'>
+                    <div className='flex gap-2 items-center justify-end items-baseline'>
                       <Typography
                         color='primary'
                         variant='h6'

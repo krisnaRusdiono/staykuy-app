@@ -7,7 +7,10 @@ const useSearchResult = () => {
   const router = useRouter();
   const params = useSearchParams();
   const [initialParams, setInitialParams] = useState<HomeSchema>();
-  const [valuePrice, setValuePrice] = useState<number[]>([200000, 90000000]);
+  const [valuePrice, setValuePrice] = useState<number[]>([20000000, 80000000]);
+  const [expandFilterFacility, setExpandFilterFacility] = useState<boolean>(false);
+
+  const toggleExpandFilterFacility = () => setExpandFilterFacility(!expandFilterFacility);
 
   const handleValuePriceChange = (
     event: Event,
@@ -48,6 +51,8 @@ const useSearchResult = () => {
     priceLabelFormat,
     handleClickDetail,
     initialParams,
+    expandFilterFacility,
+    toggleExpandFilterFacility,
   };
 };
 
