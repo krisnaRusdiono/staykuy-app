@@ -4,8 +4,8 @@ const homeSchema = z.object({
     city: z.string(),
     startDate: z.date().nullable(),
     endDate: z.date().nullable(),
-    guest: z.number(),
-    room: z.number(),
+    guest: z.string(),
+    room: z.string(),
 })
 
 export default homeSchema;

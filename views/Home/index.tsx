@@ -12,33 +12,18 @@ import {
 } from '@mui/material';
 import useHome from './index.hooks';
 import { DatePicker } from '@mui/x-date-pickers';
-import { Controller, useForm } from 'react-hook-form';
-import { HomeSchema } from './index.types';
-import { zodResolver } from '@hookform/resolvers/zod';
-import homeSchema from './index.schemas';
+import { Controller } from 'react-hook-form';
 import { addDays, subDays } from 'date-fns';
 
 const Home = () => {
-  const { toggleOpenHistory, openHistory } = useHome();
-
   const {
+    toggleOpenHistory,
+    openHistory,
     control,
     handleSubmit,
     watch,
-  } = useForm<HomeSchema>({
-    resolver: zodResolver(homeSchema),
-    defaultValues: {
-      city: '',
-      startDate: null,
-      endDate: null,
-      guest: 0,
-      room: 0,
-    }
-  })
-
-  const onSubmit = (data: HomeSchema) => {
-    console.log({ data })
-  }
+    onSubmit,
+  } = useHome();
 
   return (
     <div
