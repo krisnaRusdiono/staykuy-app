@@ -11,7 +11,7 @@ const DetailSearch = () => {
     const [initialParams, setInitialParams] = useState<HomeSchema>()
 
     const changeSearchQuery = () => {
-        if (initialParams) router.push(`/?${createQueryParams(initialParams)}`);
+        router.push(`/?${createQueryParams(initialParams || {})}`);
     }
 
     useEffect(() => {

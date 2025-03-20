@@ -2,6 +2,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import formatCurrency from '@/helpers/formatCurrency';
 import { HomeSchema } from '../Home/index.types';
+import createQueryParams from '@/utils/createQueryParams';
 
 const useSearchResult = () => {
   const router = useRouter();
@@ -28,7 +29,7 @@ const useSearchResult = () => {
   };
 
   const handleClickDetail = () => {
-    router.push('/detail/hotel-id');
+    router.push(`/detail/hotel-id?${createQueryParams(initialParams || {})}`);
   };
 
   useEffect(() => {
