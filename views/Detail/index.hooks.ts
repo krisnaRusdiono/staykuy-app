@@ -2,6 +2,9 @@ import { useState, SyntheticEvent } from 'react';
 
 const useDetail = () => {
     const [valueTabs, setValueTabs] = useState<number>(0);
+    const [expandFacility, setExpandFacility] = useState<boolean>(false);
+    
+    const toggleExpandFacility = () => setExpandFacility(!expandFacility);
 
     const handleTabsChange = (event: SyntheticEvent, value: number) =>
       setValueTabs(value);
@@ -14,10 +17,12 @@ const useDetail = () => {
     };
 
     return {
-        valueTabs,
-        handleTabsChange,
-        a11yProps,
-    }
+      valueTabs,
+      handleTabsChange,
+      a11yProps,
+      expandFacility,
+      toggleExpandFacility,
+    };
 }
 
 export default useDetail;

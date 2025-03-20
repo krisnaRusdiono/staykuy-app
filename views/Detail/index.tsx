@@ -1,7 +1,7 @@
 'use client';
 
 import AppContainer from '@/components/base/AppContainer';
-import { Typography, Divider, Button, Tab, Tabs, Box } from '@mui/material';
+import { Typography, Button, Tab, Tabs, Box } from '@mui/material';
 import Image from 'next/image';
 import starIcon from '@/public/svg/star.svg';
 import pinMarker from '@/public/svg/pinMarker.svg';
@@ -9,7 +9,6 @@ import TabContent from '@/components/base/TabContent';
 import icGym from '@/public/svg/ic_gym.svg';
 import icLaundry from '@/public/svg/ic_laundry.svg';
 import icReceptionist from '@/public/svg/ic_receptionist.svg';
-import icSpa from '@/public/svg/ic_spa.svg';
 import icSwimmingPool from '@/public/svg/ic_swimming_pool.svg';
 import icBreakfast from '@/public/svg/ic_breakfast.svg';
 import icBed from '@/public/svg/ic_double_bed.svg';
@@ -17,79 +16,57 @@ import icWifi from '@/public/svg/ic_wifi.svg';
 import icPerson from '@/public/svg/ic_person.svg';
 import icShop from '@/public/svg/ic_shop.svg';
 import useDetail from './index.hooks';
+import DetailSearch from '@/components/ui/DetailSearch';
 
 const Detail = () => {
-  const { valueTabs, handleTabsChange, a11yProps } = useDetail();
+  const { valueTabs, handleTabsChange, a11yProps, expandFacility, toggleExpandFacility } = useDetail();
 
   return (
     <AppContainer className='flex flex-col gap-4 py-4'>
-      <div className='flex flex-col gap-8 h-auto min-h-screen pt-20'>
-        <div className='w-full bg-white rounded-md flex justify-between items-center gap-4 px-4 py-6 drop-shadow-lg border border-solid border-neutral-100'>
-          <div className='w-full flex gap-4'>
-            <div className='flex flex-col justify-between h-inherit'>
-              <Typography variant='body2'>
-                Kota/Nama Hotel/ Destinasi
-              </Typography>
-              <Typography variant='body1' className='!font-semibold'>
-                Jakarta
-              </Typography>
-            </div>
-            <Divider orientation='vertical' variant='middle' flexItem />
-            <div className='flex flex-col justify-between h-inherit'>
-              <Typography variant='body2'>Tanggal Menginap</Typography>
-              <Typography variant='body1' className='!font-semibold'>
-                12 Mar - 14 Mar 2025
-              </Typography>
-            </div>
-            <Divider orientation='vertical' variant='middle' flexItem />
-            <div className='flex flex-col justify-between h-inherit'>
-              <Typography variant='body2'>Jumlah Tamu dan Kamar</Typography>
-              <Typography variant='body1' className='!font-semibold'>
-                2 Tamu 2 Kamar
-              </Typography>
-            </div>
-          </div>
-          <Button
-            variant='contained'
-            className='text-sm !normal-case text-nowrap !px-8 !py-2 !rounded-xl'
-          >
-            Ubah Pencarian
-          </Button>
-        </div>
+      <div className='flex flex-col gap-6 h-auto min-h-screen pt-20'>
+        <DetailSearch />
         <div className='flex flex-col gap-4'>
-          <div className='flex flex-col gap-2'>
-            <div className='flex gap-4'>
-              <Typography variant='h5'>Hilton Garden Inn</Typography>
-              <div className='flex gap-2'>
-                <Image src={starIcon} width={17} alt='star' />
-                <Image src={starIcon} width={17} alt='star' />
-                <Image src={starIcon} width={17} alt='star' />
-                <Image src={starIcon} width={17} alt='star' />
-                <Image src={starIcon} width={17} alt='star' />
+          <div className='flex flex-col gap-4'>
+            <div className='flex flex-col gap-2'>
+              <div className='flex gap-4'>
+                <Typography variant='h5'>Hilton Garden Inn</Typography>
+                <div className='flex gap-2'>
+                  <Image src={starIcon} width={17} alt='star' />
+                  <Image src={starIcon} width={17} alt='star' />
+                  <Image src={starIcon} width={17} alt='star' />
+                  <Image src={starIcon} width={17} alt='star' />
+                  <Image src={starIcon} width={17} alt='star' />
+                </div>
+              </div>
+              <div className='flex gap-2 items-center'>
+                <Image src={pinMarker} alt='pin map' width={14} />
+                <Typography variant='caption'>
+                  Jl. Taman Palem Lestari No.1 Blok B13, West Cengkareng,
+                  Cengkareng, West Jakarta City, Jakarta 11730
+                </Typography>
               </div>
             </div>
-            <div className='flex gap-2 items-center'>
-              <Image src={pinMarker} alt='pin map' width={14} />
-              <Typography variant='caption'>
-                Jl. Taman Palem Lestari No.1 Blok B13, West Cengkareng,
-                Cengkareng, West Jakarta City, Jakarta 11730
-              </Typography>
-            </div>
-            <div className='w-full min-h-80 grid grid-cols-4 gap-4 [&>div]:rounded-xl'>
-              <div
-                className='bg-center bg-no-repeat bg-cover col-span-2 row-span-2 w-full h-full'
-                style={{
-                  backgroundImage: "url('/images/product-thumbnail.jpg')",
-                }}
-              />
-              {new Array(4).fill(null).map((_, i) => (
+            <div className='w-full min-h-96 grid grid-cols-1 md:grid-cols-4 gap-4 [&>div]:rounded-xl'>
+              <div className='md:col-span-2 md:row-span-2 overflow-hidden hover:[&>div]:scale-110 hover:drop-shadow-lg'>
                 <div
-                  key={i}
-                  className='bg-center bg-no-repeat bg-cover col-span-1 w-full h-full'
+                  className='bg-center bg-no-repeat bg-cover w-full h-full min-h-60 md:min-h-fit transition-all duration-300'
                   style={{
                     backgroundImage: "url('/images/product-thumbnail.jpg')",
                   }}
                 />
+              </div>
+              {new Array(4).fill(null).map((_, i) => (
+                <div
+                  key={i}
+                  className='col-span-1 row-span-1 overflow-hidden hover:[&>div]:scale-110 hover:drop-shadow-lg min-h-60 md:min-h-fit'
+                >
+                  <div
+                    className='bg-center bg-no-repeat bg-cover col-span-1 w-full h-full transition-all duration-300'
+                    style={{
+                      backgroundImage: "url('/images/product-thumbnail.jpg')",
+                    }}
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -149,40 +126,41 @@ const Detail = () => {
               Waterpark, Waterbom Jakarta, dan PIK Avenue Mall.
             </p>
           </TabContent>
-          <TabContent
-            value={valueTabs}
-            index={1}
-            className='[&>div]:flex [&>div]:w-full [&>div]:gap-4 [&>div]:flex-col text-center'
-          >
-            {new Array(5).fill(null).map((_, i) => (
-              <div
-                className='grid grid-cols-5 gap-4 my-2'
-                key={`facility-${i}`}
-              >
-                <div className='flex gap-2'>
-                  <Image src={icLaundry} alt='laundry' width={20} />
-                  <Typography>Laundry</Typography>
+          <TabContent value={valueTabs} index={1} className='text-center'>
+            <div
+              className={`${
+                expandFacility ? 'h-52' : 'h-20'
+              } overflow-hidden flex w-full gap-2 flex-col transition-all duration-300`}
+            >
+              {new Array(3).fill(null).map((_, i) => (
+                <div
+                  className='grid grid-cols-2 md:grid-cols-4 gap-4 my-2'
+                  key={`facility-${i}`}
+                >
+                  <div className='flex gap-2'>
+                    <Image src={icLaundry} alt='laundry' width={20} />
+                    <Typography>Laundry</Typography>
+                  </div>
+                  <div className='flex gap-2'>
+                    <Image src={icSwimmingPool} alt='SwimmingPool' width={20} />
+                    <Typography>Kolam Renang</Typography>
+                  </div>
+                  <div className='flex gap-2'>
+                    <Image src={icReceptionist} alt='Receptionist' width={20} />
+                    <Typography>Receptionist</Typography>
+                  </div>
+                  <div className='flex gap-2'>
+                    <Image src={icGym} alt='Gym' width={20} />
+                    <Typography>Gym</Typography>
+                  </div>
                 </div>
-                <div className='flex gap-2'>
-                  <Image src={icSwimmingPool} alt='SwimmingPool' width={20} />
-                  <Typography>Kolam Renang</Typography>
-                </div>
-                <div className='flex gap-2'>
-                  <Image src={icReceptionist} alt='Receptionist' width={20} />
-                  <Typography>Receptionist</Typography>
-                </div>
-                <div className='flex gap-2'>
-                  <Image src={icGym} alt='Gym' width={20} />
-                  <Typography>Gym</Typography>
-                </div>
-                <div className='flex gap-2'>
-                  <Image src={icSpa} alt='Spa' width={20} />
-                  <Typography>Spa</Typography>
-                </div>
-              </div>
-            ))}
-            <Button className='!mt-2 !normal-case !mx-auto'>
-              Tampilkan lebih banyak
+              ))}
+            </div>
+            <Button
+              className='!mt-2 !normal-case !mx-auto'
+              onClick={toggleExpandFacility}
+            >
+              {expandFacility ? 'Sembunyikan' : 'Tampilkan lebih banyak'}
             </Button>
           </TabContent>
           <TabContent
@@ -191,14 +169,19 @@ const Detail = () => {
             className='[&>div]:flex [&>div]:flex-col [&>div]:w-full [&>div]:gap-8'
           >
             {new Array(2).fill(null).map((_, i) => (
-              <div key={`kamar-${i}`} className='flex gap-4'>
-                <div className='rounded-2xl overflow-hidden drop-shadow-lg bg-white h-fit'>
-                  <div
-                    className='rounded-2xl bg-center bg-cover bg-no-repeat min-w-96 h-fit min-h-[12.5rem]'
-                    style={{
-                      backgroundImage: "url('/images/product-thumbnail.jpg')",
-                    }}
-                  />
+              <div
+                key={`kamar-${i}`}
+                className='flex flex-wrap md:flex-nowrap gap-4'
+              >
+                <div className='rounded-2xl overflow-hidden drop-shadow-lg bg-white h-fit w-full md:w-96 hover:[&>:first-child>div]:scale-110 hover:drop-shadow-xl transition-all'>
+                  <div className='rounded-2xl w-full h-fit overflow-hidden'>
+                    <div
+                      className='bg-center bg-cover bg-no-repeat h-full min-h-80 md:min-h-[12.5rem] duration-300 transition-all'
+                      style={{
+                        backgroundImage: "url('/images/product-thumbnail.jpg')",
+                      }}
+                    />
+                  </div>
                   <div className='flex justify-between gap-4 p-4'>
                     <Typography>Kamar Twin Bed</Typography>
                     <Typography>
@@ -210,7 +193,7 @@ const Detail = () => {
                   {new Array(3).fill(null).map((_, id) => (
                     <div
                       key={`detail-${i}-${id}`}
-                      className='bg-white drop-shadow-xl rounded-2xl p-4 flex gap-4 w-full justify-between min-h-[12.5rem]'
+                      className='bg-white drop-shadow-xl flex-wrap md:flex-nowrap justify-end rounded-2xl p-4 flex gap-4 w-full md:justify-between min-h-[12.5rem] hover:drop-shadow-2xl transition-all duration-300'
                     >
                       <div className='w-full flex flex-col gap-4'>
                         <Typography variant='body1' className='!font-semibold'>
@@ -290,7 +273,7 @@ const Detail = () => {
             <Typography>Belum ada review untuk hotel ini</Typography>
           </TabContent>
           <TabContent value={valueTabs} index={4}>
-            <div className='flex gap-4'>
+            <div className='flex flex-col lg:flex-row gap-4'>
               <iframe
                 src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.9390151431508!2d106.72653547583761!3d-6.138895493848001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6a1d772ed6f4d7%3A0x32884c7782eb6492!2sHilton%20Garden%20Inn%20Jakarta%20Taman%20Palem!5e0!3m2!1sid!2sid!4v1742429932287!5m2!1sid!2sid'
                 allowFullScreen
