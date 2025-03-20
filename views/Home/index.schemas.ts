@@ -7,7 +7,7 @@ const homeSchema = z.object({
     endDate: z.date().nullish(),
     guest: z.string().optional(),
     room: z.string().optional(),
-    stars: z.array(z.number())
+    stars: z.array(z.number().optional()).optional()
 })
 
 export default homeSchema;

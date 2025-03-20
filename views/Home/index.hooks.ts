@@ -29,6 +29,7 @@ const useHome = () => {
       endDate: null,
       guest: '1',
       room: '1',
+      stars: []
     }
   })
 
