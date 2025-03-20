@@ -19,7 +19,7 @@ const Home = () => {
     <div
       className='min-h-screen bg-center bg-no-repeat bg-cover relative'
       style={{
-        backgroundImage: "url('./images/bg-homepage.jpg')",
+        backgroundImage: "url('/images/bg-homepage.jpg')",
       }}
     >
       <div className='w-screen h-screen bg-neutral-900 opacity-80' />
