@@ -1,9 +1,12 @@
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import formatCurrency from '@/helpers/formatCurrency';
+import { HomeSchema } from '../Home/index.types';
 
 const useSearchResult = () => {
   const router = useRouter();
+  const params = useSearchParams();
+  const [initialParams, setInitialParams] = useState<HomeSchema>();
   const [valuePrice, setValuePrice] = useState<number[]>([200000, 90000000]);
 
   const handleValuePriceChange = (
@@ -25,12 +28,26 @@ const useSearchResult = () => {
     router.push('/detail/hotel-id');
   };
 
+  useEffect(() => {
+    const res: HomeSchema = Object.fromEntries(
+      params.entries()
+    ) as unknown as HomeSchema;
+    const { startDate, endDate } = res || {};
+    const patchObj = {
+      ...res,
+      startDate: startDate ? new Date(startDate) : null,
+      endDate: endDate ? new Date(endDate) : null,
+    };
+    setInitialParams(patchObj);
+  }, [params]);
+
   return {
     valuePrice,
     handleValuePriceChange,
     renderValuePrice,
     priceLabelFormat,
     handleClickDetail,
+    initialParams,
   };
 };
 

@@ -11,6 +11,7 @@ import icReceptionist from '@/public/svg/ic_receptionist.svg';
 import icSpa from '@/public/svg/ic_spa.svg';
 import icSwimmingPool from '@/public/svg/ic_swimming_pool.svg';
 import useSearchResult from './index.hooks';
+import DetailSearch from '@/components/ui/DetailSearch';
 
 const SearchResult = () => {
   const {
@@ -24,38 +25,7 @@ const SearchResult = () => {
   return (
     <AppContainer className='flex flex-col gap-4 py-4'>
       <div className='flex flex-col gap-8 h-auto min-h-screen pt-20'>
-        <div className='w-full bg-white rounded-md flex justify-between items-center gap-4 px-4 py-6 drop-shadow-lg border border-solid border-neutral-100'>
-          <div className='w-full flex gap-4'>
-            <div className='flex flex-col justify-between h-inherit'>
-              <Typography variant='body2'>
-                Kota/Nama Hotel/ Destinasi
-              </Typography>
-              <Typography variant='body1' className='!font-semibold'>
-                Jakarta
-              </Typography>
-            </div>
-            <Divider orientation='vertical' variant='middle' flexItem />
-            <div className='flex flex-col justify-between h-inherit'>
-              <Typography variant='body2'>Tanggal Menginap</Typography>
-              <Typography variant='body1' className='!font-semibold'>
-                12 Mar - 14 Mar 2025
-              </Typography>
-            </div>
-            <Divider orientation='vertical' variant='middle' flexItem />
-            <div className='flex flex-col justify-between h-inherit'>
-              <Typography variant='body2'>Jumlah Tamu dan Kamar</Typography>
-              <Typography variant='body1' className='!font-semibold'>
-                2 Tamu 2 Kamar
-              </Typography>
-            </div>
-          </div>
-          <Button
-            variant='contained'
-            className='text-sm !normal-case text-nowrap !px-8 !py-2 !rounded-xl'
-          >
-            Ubah Pencarian
-          </Button>
-        </div>
+        <DetailSearch />
         <div className='flex gap-8'>
           <div className='min-w-72 rounded-xl drop-shadow-lg p-4 bg-white flex flex-col gap-4 h-fit'>
             <Typography>Filter Pencarian</Typography>
