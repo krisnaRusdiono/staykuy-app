@@ -5,6 +5,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import homeSchema from './index.schemas';
 import { HomeSchema } from './index.types';
+import fetcher from '@/lib/fetcher';
+import { ENDPOINT_LOCAL_API } from '@/constants/endpoint';
+import { useQuery } from '@tanstack/react-query';
 
 const useHome = () => {
   const router = useRouter();
@@ -34,6 +37,16 @@ const useHome = () => {
     router.push(`search-result?${queryString}`);
   };
 
+  const { CITY } = ENDPOINT_LOCAL_API;
+
+  const {
+    data: response,
+    isLoading,
+  } = useQuery({
+    queryKey: ['getCity'],
+    queryFn: () => fetcher({ endpoint: CITY }),
+  });
+
   useEffect(() => {
     const res: HomeSchema = Object.fromEntries(
       params.entries()
@@ -54,6 +67,8 @@ const useHome = () => {
     handleSubmit,
     watch,
     onSubmit,
+    response,
+    isLoading,
   };
 };
 

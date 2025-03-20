@@ -7,6 +7,8 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  MenuItem,
+  Select,
   TextField,
   Typography,
 } from '@mui/material';
@@ -23,7 +25,11 @@ const Home = () => {
     handleSubmit,
     watch,
     onSubmit,
+    response,
+    isLoading,
   } = useHome();
+
+  const { data: dataCity = [] } = response || {};
 
   return (
     <div
@@ -57,15 +63,25 @@ const Home = () => {
                   field: { onChange, value, ref },
                   fieldState: { error },
                 }) => (
-                  <TextField
-                    className='[&>div]:!rounded-2xl w-full'
-                    placeholder='Pilih nama hotel/destinasi/kota menginap'
-                    onChange={onChange}
-                    value={value}
+                  <Select
                     ref={ref}
+                    labelId='city'
+                    id='city'
+                    value={value}
+                    className='[&>div]:!rounded-2xl w-full'
+                    onChange={onChange}
                     error={!!error}
+                    disabled={isLoading}
                     autoFocus
-                  />
+                  >
+                    {(dataCity || []).map(
+                      ({ id, name }: { id: number; name: string }) => (
+                        <MenuItem value={name} key={id}>
+                          {name}
+                        </MenuItem>
+                      )
+                    )}
+                  </Select>
                 )}
               />
             </div>
