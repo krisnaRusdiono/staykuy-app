@@ -6,10 +6,17 @@ import { LayoutContextProvider } from '@/context/layout';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 import { ReactNode } from 'react';
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 
 const HomeLayout = ({ children }: { children: ReactNode }) => {
-    return (
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
+  const queryClient = new QueryClient();
+
+  return (
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <QueryClientProvider client={queryClient}>
         <LayoutContextProvider>
           <Sidebar />
           <div className='h-auto min-h-screen'>
@@ -17,8 +24,9 @@ const HomeLayout = ({ children }: { children: ReactNode }) => {
             <main>{children}</main>
           </div>
         </LayoutContextProvider>
-      </LocalizationProvider>
-    );
+      </QueryClientProvider>
+    </LocalizationProvider>
+  );
 }
 
 export default HomeLayout;

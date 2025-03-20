@@ -12,6 +12,7 @@ import icSpa from '@/public/svg/ic_spa.svg';
 import icSwimmingPool from '@/public/svg/ic_swimming_pool.svg';
 import useSearchResult from './index.hooks';
 import DetailSearch from '@/components/ui/DetailSearch';
+import { HotelData } from './index.types';
 
 const SearchResult = () => {
   const {
@@ -22,7 +23,13 @@ const SearchResult = () => {
     handleClickDetail,
     expandFilterFacility,
     toggleExpandFilterFacility,
+    response,
+    isLoading,
+    onCheckboxChange,
   } = useSearchResult();
+  
+  const { data: dataResponse } = response || {};
+  const { data = [] } = dataResponse || {}
 
   return (
     <AppContainer className='flex flex-col gap-4 py-4'>
@@ -36,20 +43,34 @@ const SearchResult = () => {
                 <div>
                   <Typography>Bintang Hotel</Typography>
                   <div className='flex gap-2 items-center'>
-                    <Checkbox value={1} classes={{ root: '!px-0 !py-1' }} />
+                    <Checkbox
+                      value={1}
+                      classes={{ root: '!px-0 !py-1' }}
+                      onChange={onCheckboxChange}
+                    />
                     <div className='flex gap-2 items-center'>
                       <Image src={starIcon} width={17} alt='star' />
                     </div>
                   </div>
                   <div className='flex gap-2 items-center'>
-                    <Checkbox value={2} classes={{ root: '!px-0 !py-1' }} />
+                    <Checkbox
+                      value={2}
+                      classes={{ root: '!px-0 !py-1' }}
+                      onChange={onCheckboxChange}
+
+                    />
                     <div className='flex gap-2 items-center'>
                       <Image src={starIcon} width={17} alt='star' />
                       <Image src={starIcon} width={17} alt='star' />
                     </div>
                   </div>
                   <div className='flex gap-2 items-center'>
-                    <Checkbox value={3} classes={{ root: '!px-0 !py-1' }} />
+                    <Checkbox
+                      value={3}
+                      classes={{ root: '!px-0 !py-1' }}
+                      onChange={onCheckboxChange}
+
+                    />
                     <div className='flex gap-2 items-center'>
                       <Image src={starIcon} width={17} alt='star' />
                       <Image src={starIcon} width={17} alt='star' />
@@ -57,7 +78,12 @@ const SearchResult = () => {
                     </div>
                   </div>
                   <div className='flex gap-2 items-center'>
-                    <Checkbox value={4} classes={{ root: '!px-0 !py-1' }} />
+                    <Checkbox
+                      value={4}
+                      classes={{ root: '!px-0 !py-1' }}
+                      onChange={onCheckboxChange}
+
+                    />
                     <div className='flex gap-2 items-center'>
                       <Image src={starIcon} width={17} alt='star' />
                       <Image src={starIcon} width={17} alt='star' />
@@ -66,7 +92,12 @@ const SearchResult = () => {
                     </div>
                   </div>
                   <div className='flex gap-2 items-center'>
-                    <Checkbox value={5} classes={{ root: '!px-0 !py-1' }} />
+                    <Checkbox
+                      value={5}
+                      classes={{ root: '!px-0 !py-1' }}
+                      onChange={onCheckboxChange}
+
+                    />
                     <div className='flex gap-2 items-center'>
                       <Image src={starIcon} width={17} alt='star' />
                       <Image src={starIcon} width={17} alt='star' />
@@ -152,83 +183,92 @@ const SearchResult = () => {
                 color='textDisabled'
                 className='italic'
               >
-                9999 Hotel Ditemukan
+                {data.length} Hotel Ditemukan
               </Typography>
             </div>
-            <div className='flex gap-4 flex-col'>
-              {new Array(8).fill(null).map((_, i) => (
-                <div
-                  key={i}
-                  className='flex gap-6 bg-white rounded-2xl drop-shadow-lg overflow-hidden transition-all hover:drop-shadow-xl hover:[&>:first-child>div]:scale-110'
-                >
-                  <div className='w-96 h-full overflow-hidden flex'>
-                    <div
-                      className='w-96 bg-center bg-cover bg-no-repeat transition-all duration-300'
-                      style={{
-                        backgroundImage: "url('/images/product-thumbnail.jpg')",
-                      }}
-                    />
-                  </div>
-                  <div className='w-full p-4 pl-0 flex flex-col gap-2'>
-                    <Button
-                      variant='text'
-                      disableRipple
-                      className='!p-0 w-fit'
-                      onClick={handleClickDetail}
-                    >
-                      <Typography variant='body1' className='!font-semibold'>
-                        Hilton Garden Inn
-                      </Typography>
-                    </Button>
-                    <div className='flex gap-2 items-center'>
-                      {new Array(5).fill(null).map((_, i) => (
-                        <Image src={starIcon} width={17} alt='star' key={i} />
-                      ))}
+            {isLoading ? (
+              <div className='flex w-full h-full justify-center items-center'>
+                Loading
+              </div>
+            ) : (
+              <div className='flex gap-4 flex-col'>
+                {(data || []).map((hotel: HotelData) => (
+                  <div
+                    key={hotel.id}
+                    className='flex gap-6 bg-white rounded-2xl drop-shadow-lg overflow-hidden transition-all hover:drop-shadow-xl hover:[&>:first-child>div]:scale-110'
+                  >
+                    <div className='w-96 h-full overflow-hidden flex'>
+                      <div
+                        className='w-96 bg-center bg-cover bg-no-repeat transition-all duration-300'
+                        style={{
+                          backgroundImage: `url('${
+                            Array.isArray(hotel.images)
+                              ? hotel.images[hotel.images.length - 1]
+                              : hotel.images
+                          }')`,
+                        }}
+                      />
                     </div>
-                    <div className='flex gap-2 items-center items-center'>
-                      <Image src={pinMarker} alt='pin map' width={14} />
-                      <Typography variant='caption'>
-                        Jl. Taman Palem Lestari No.1 Blok B13, West Cengkareng,
-                        Cengkareng, West Jakarta City, Jakarta 11730
-                      </Typography>
-                    </div>
-                    <div className='flex gap-2 items-center items-center'>
-                      <Image src={icLaundry} alt='pin map' width={20} />
-                      <Image src={icSwimmingPool} alt='pin map' width={20} />
-                      <Image src={icReceptionist} alt='pin map' width={20} />
-                      <Image src={icGym} alt='pin map' width={20} />
-                      <Image src={icSpa} alt='pin map' width={20} />
-                    </div>
-                    <div className='flex gap-2 items-center'>
+                    <div className='w-full p-4 pl-0 flex flex-col gap-2'>
                       <Button
-                        variant='contained'
-                        className='!rounded-2xl !normal-case italic'
-                        size='small'
+                        variant='text'
+                        disableRipple
+                        className='!p-0 w-fit'
+                        onClick={handleClickDetail}
                       >
-                        Bisa refund
+                        <Typography variant='body1' className='!font-semibold'>
+                          {hotel.name}
+                        </Typography>
                       </Button>
-                      <Button
-                        variant='contained'
-                        className='!rounded-2xl !normal-case italic'
-                        size='small'
-                      >
-                        Bisa reschedule
-                      </Button>
-                    </div>
-                    <div className='flex gap-2 justify-end items-baseline'>
-                      <Typography
-                        color='primary'
-                        variant='h6'
-                        className='!font-bold'
-                      >
-                        IDR 99.999.999
-                      </Typography>
-                      <Typography variant='body1'>/ malam</Typography>
+                      <div className='flex gap-2 items-center'>
+                        {new Array(hotel.star).fill(null).map((_, i) => (
+                          <Image src={starIcon} width={17} alt='star' key={i} />
+                        ))}
+                      </div>
+                      <div className='flex gap-2 items-center'>
+                        <Image src={pinMarker} alt='pin map' width={14} />
+                        <Typography variant='caption'>
+                          {hotel.address}
+                        </Typography>
+                      </div>
+                      <div className='flex gap-2 items-center'>
+                        <Image src={icLaundry} alt='pin map' width={20} />
+                        <Image src={icSwimmingPool} alt='pin map' width={20} />
+                        <Image src={icReceptionist} alt='pin map' width={20} />
+                        <Image src={icGym} alt='pin map' width={20} />
+                        <Image src={icSpa} alt='pin map' width={20} />
+                      </div>
+                      <div className='flex gap-2 items-center'>
+                        <Button
+                          variant='contained'
+                          className='!rounded-2xl !normal-case italic'
+                          size='small'
+                        >
+                          Bisa refund
+                        </Button>
+                        <Button
+                          variant='contained'
+                          className='!rounded-2xl !normal-case italic'
+                          size='small'
+                        >
+                          Bisa reschedule
+                        </Button>
+                      </div>
+                      <div className='flex gap-2 justify-end items-baseline'>
+                        <Typography
+                          color='primary'
+                          variant='h6'
+                          className='!font-bold'
+                        >
+                          IDR 99.999.999
+                        </Typography>
+                        <Typography variant='body1'>/ malam</Typography>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

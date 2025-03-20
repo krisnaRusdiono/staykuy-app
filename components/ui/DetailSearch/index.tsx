@@ -20,7 +20,7 @@ const DetailSearch = () => {
     }, [params])
 
     const {
-        city = '-',
+        cityName = '-',
         startDate = '',
         endDate = '',
         guest = '0',
@@ -33,7 +33,7 @@ const DetailSearch = () => {
           <div className='flex flex-col justify-between h-inherit'>
             <Typography variant='body2'>Kota/Nama Hotel/ Destinasi</Typography>
             <Typography variant='body1' className='!font-semibold'>
-              {city}
+              {cityName}
             </Typography>
           </div>
           <Divider orientation='vertical' variant='middle' flexItem />

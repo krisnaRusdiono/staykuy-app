@@ -1,11 +1,13 @@
 import { z } from 'zod';
 
 const homeSchema = z.object({
-    city: z.string(),
-    startDate: z.date().nullable(),
-    endDate: z.date().nullable(),
-    guest: z.string(),
-    room: z.string(),
+    city: z.number().optional(),
+    cityName: z.string().optional(),
+    startDate: z.date().nullish(),
+    endDate: z.date().nullish(),
+    guest: z.string().optional(),
+    room: z.string().optional(),
+    stars: z.array(z.number())
 })
 
 export default homeSchema;
