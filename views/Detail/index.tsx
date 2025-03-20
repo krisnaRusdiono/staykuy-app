@@ -10,13 +10,12 @@ import icGym from '@/public/svg/ic_gym.svg';
 import icLaundry from '@/public/svg/ic_laundry.svg';
 import icReceptionist from '@/public/svg/ic_receptionist.svg';
 import icSwimmingPool from '@/public/svg/ic_swimming_pool.svg';
-import icBreakfast from '@/public/svg/ic_breakfast.svg';
-import icBed from '@/public/svg/ic_double_bed.svg';
-import icWifi from '@/public/svg/ic_wifi.svg';
-import icPerson from '@/public/svg/ic_person.svg';
-import icShop from '@/public/svg/ic_shop.svg';
 import useDetail from './index.hooks';
 import DetailSearch from '@/components/ui/DetailSearch';
+import ProchedureCheckin from './components/ProchedureCheckin';
+import LocationDetail from './components/LocationDetail';
+import ReviewDetail from './components/ReviewDetail';
+import RoomDetail from './components/RoomDetail';
 
 const Detail = () => {
   const { valueTabs, handleTabsChange, a11yProps, expandFacility, toggleExpandFacility } = useDetail();
@@ -168,237 +167,16 @@ const Detail = () => {
             index={2}
             className='[&>div]:flex [&>div]:flex-col [&>div]:w-full [&>div]:gap-8'
           >
-            {new Array(2).fill(null).map((_, i) => (
-              <div
-                key={`kamar-${i}`}
-                className='flex flex-wrap md:flex-nowrap gap-4'
-              >
-                <div className='rounded-2xl overflow-hidden drop-shadow-lg bg-white h-fit w-full md:w-96 hover:[&>:first-child>div]:scale-110 hover:drop-shadow-xl transition-all'>
-                  <div className='rounded-2xl w-full h-fit overflow-hidden'>
-                    <div
-                      className='bg-center bg-cover bg-no-repeat h-full min-h-80 md:min-h-[12.5rem] duration-300 transition-all'
-                      style={{
-                        backgroundImage: "url('/images/product-thumbnail.jpg')",
-                      }}
-                    />
-                  </div>
-                  <div className='flex justify-between gap-4 p-4'>
-                    <Typography>Kamar Twin Bed</Typography>
-                    <Typography>
-                      42 <sup>m2</sup>
-                    </Typography>
-                  </div>
-                </div>
-                <div className='flex flex-col gap-4 w-full'>
-                  {new Array(3).fill(null).map((_, id) => (
-                    <div
-                      key={`detail-${i}-${id}`}
-                      className='bg-white drop-shadow-xl flex-wrap md:flex-nowrap justify-end rounded-2xl p-4 flex gap-4 w-full md:justify-between min-h-[12.5rem] hover:drop-shadow-2xl transition-all duration-300'
-                    >
-                      <div className='w-full flex flex-col gap-4'>
-                        <Typography variant='body1' className='!font-semibold'>
-                          Kamar, 2 Tempat Tidur Twin
-                        </Typography>
-                        <div className='flex gap-2 items-center'>
-                          <Button
-                            variant='contained'
-                            className='!rounded-2xl !normal-case'
-                            size='small'
-                          >
-                            Bisa <i className='ml-1'>refund</i>
-                          </Button>
-                          <Button
-                            variant='contained'
-                            className='!rounded-2xl !normal-case'
-                            size='small'
-                          >
-                            Bisa <i className='ml-1'>reschedule</i>
-                          </Button>
-                        </div>
-                        <div className='flex gap-4 flex-wrap w-full'>
-                          <div className='flex gap-2 px-4'>
-                            <Image src={icPerson} alt='visitor' />
-                            <Typography variant='body1'>2 Tamu</Typography>
-                          </div>
-                          <div className='flex gap-2 px-4'>
-                            <Image src={icBed} alt='bed' />
-                            <Typography variant='body1'>1 Twin Bed</Typography>
-                          </div>
-                          <div className='flex gap-2 px-4'>
-                            <Image
-                              src={icBreakfast}
-                              alt='breakfast'
-                              width={20}
-                            />
-                            <Typography variant='body1'>Sarapan</Typography>
-                          </div>
-                          <div className='flex gap-2 px-4'>
-                            <Image src={icWifi} alt='wifi' width={20} />
-                            <Typography variant='body1'>Wifi Gratis</Typography>
-                          </div>
-                        </div>
-                      </div>
-                      <div className='min-w-72 text-right self-end'>
-                        <Typography
-                          color='textDisabled'
-                          variant='h6'
-                          className='!font-semibold line-through'
-                        >
-                          IDR 99.999.999
-                        </Typography>
-                        <div className='flex gap-2 justify-end items-baseline'>
-                          <Typography
-                            color='primary'
-                            variant='h6'
-                            className='!font-bold'
-                          >
-                            IDR 99.999.999
-                          </Typography>
-                          <Typography variant='body1'>/ malam</Typography>
-                        </div>
-                        <Button
-                          variant='contained'
-                          className='!rounded-xl !mt-4'
-                        >
-                          Pilih Kamar
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
+            <RoomDetail />
           </TabContent>
           <TabContent value={valueTabs} index={3}>
-            <Typography>Belum ada review untuk hotel ini</Typography>
+            <ReviewDetail />
           </TabContent>
           <TabContent value={valueTabs} index={4}>
-            <div className='flex flex-col lg:flex-row gap-4'>
-              <iframe
-                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.9390151431508!2d106.72653547583761!3d-6.138895493848001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6a1d772ed6f4d7%3A0x32884c7782eb6492!2sHilton%20Garden%20Inn%20Jakarta%20Taman%20Palem!5e0!3m2!1sid!2sid!4v1742429932287!5m2!1sid!2sid'
-                allowFullScreen
-                className='w-full min-h-96 rounded-xl'
-                loading='lazy'
-                referrerPolicy='no-referrer-when-downgrade'
-              />
-              <div className='w-full flex flex-col gap-4'>
-                <div>
-                  <Typography>
-                    Jalan Taman Palem Lestari Blok 13 no 1, Cengkareng, Jakarta
-                    Barat
-                  </Typography>
-                  <Button variant='text' className='!p-0 !underline'>
-                    Lihat peta
-                  </Button>
-                </div>
-                <div className='flex gap-4'>
-                  <Image src={icShop} alt='shop' width={22} />
-                  <Typography variant='body1'>
-                    Dekat dengan mall Taman Palem
-                  </Typography>
-                </div>
-                <div className='flex gap-4'>
-                  <Image src={icShop} alt='shop' width={22} />
-                  <Typography variant='body1'>Dekat dengan PIK 2</Typography>
-                </div>
-                <div className='flex gap-4'>
-                  <Image src={icShop} alt='shop' width={22} />
-                  <Typography variant='body1'>
-                    Dekat dengan Helens Kitchen
-                  </Typography>
-                </div>
-              </div>
-            </div>
+            <LocationDetail />
           </TabContent>
           <TabContent value={valueTabs} index={5}>
-            <h2>Prosedur Check-in</h2>
-            <ul className='list-disc pl-6'>
-              <li>
-                <strong>Check-in:</strong> 15:00 - 23:59
-              </li>
-              <li>
-                <strong>Check-out:</strong> 11:00
-              </li>
-            </ul>
-            <br />
-
-            <h3>Kebijakan Check-in</h3>
-            <ul className='list-disc pl-6'>
-              <li>
-                Biaya penambahan orang dapat berlaku dan berbeda-beda menurut
-                kebijakan properti.
-              </li>
-              <li>
-                Tanda pengenal berfoto yang dikeluarkan oleh pemerintah dan
-                kartu kredit, kartu debit, atau deposit uang tunai diperlukan
-                saat check-in untuk biaya tidak terduga.
-              </li>
-              <li>
-                Pemenuhan permintaan khusus bergantung pada ketersediaan sewaktu
-                check-in dan mungkin menimbulkan biaya tambahan; permintaan
-                khusus tidak dapat dijamin.
-              </li>
-              <li>
-                Properti ini menerima kartu kredit; tidak menerima uang tunai.
-              </li>
-              <li>Tersedia transaksi non-tunai.</li>
-              <li>
-                Fitur keamanan di properti ini termasuk alat pemadam api, sistem
-                keamanan, dan P3K.
-              </li>
-              <li>
-                Properti ini menegaskan bahwa mereka mengikuti praktik sanitasi
-                dari panduan CleanStay (Hilton).
-              </li>
-              <li>
-                <strong>Bellboy atau resepsionis</strong> akan menyambut tamu
-                saat kedatangan.
-              </li>
-            </ul>
-            <p>
-              <em>
-                Selengkapnya: Mau check-in lebih awal? Kamu bisa isi Permintaan
-                Khusus di halaman pemesanan.
-              </em>
-            </p>
-
-            <br />
-            <h2>Kebijakan Lainnya</h2>
-
-            <h3>Anak</h3>
-            <ul className='list-disc pl-6'>
-              <li>Tamu umur berapa pun bisa menginap di sini.</li>
-              <li>Anak-anak 18 tahun ke atas dianggap sebagai tamu dewasa.</li>
-              <li>
-                Pastikan umur anak yang menginap sesuai dengan detail pemesanan.
-                Jika berbeda, tamu mungkin akan dikenakan biaya tambahan saat
-                check-in.
-              </li>
-            </ul>
-
-            <br />
-            <h3>Deposit</h3>
-            <p>Tamu perlu membayar deposit saat check-in.</p>
-
-            <br />
-            <h3>Umur</h3>
-            <p>Tamu umur berapa pun bisa menginap di sini.</p>
-
-            <br />
-            <h3>Sarapan</h3>
-            <p>Sarapan tersedia pukul 07:00 - 10:00 waktu lokal.</p>
-
-            <br />
-            <h3>Hewan Peliharaan</h3>
-            <p>Tidak diperbolehkan membawa hewan peliharaan.</p>
-
-            <br />
-            <h3>Merokok</h3>
-            <p>Kamar bebas asap rokok.</p>
-
-            <br />
-            <h3>Alkohol</h3>
-            <p>Minuman beralkohol diperbolehkan.</p>
+            <ProchedureCheckin />
           </TabContent>
         </Box>
       </div>
