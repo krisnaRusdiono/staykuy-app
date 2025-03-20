@@ -40,7 +40,7 @@ const Home = () => {
       }}
     >
       <div className='w-screen h-screen bg-neutral-900 opacity-80' />
-      <div className='absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 container flex flex-col gap-12'>
+      <div className='absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 container flex flex-col gap-12 p-4'>
         <Typography
           className='text-center text-white !font-semibold'
           variant='h4'
@@ -52,7 +52,7 @@ const Home = () => {
           onSubmit={handleSubmit(onSubmit)}
           className='w-full flex flex-col gap-4'
         >
-          <div className='w-full bg-white rounded-xl flex gap-4 p-4'>
+          <div className='w-full bg-white rounded-xl flex flex-wrap lg:flex-nowrap gap-4 p-4'>
             <div className='flex flex-col gap-2 w-full h-inherit justify-between'>
               <Typography variant='body2'>
                 Pilih Kota/Nama Hotel/ Destinasi
