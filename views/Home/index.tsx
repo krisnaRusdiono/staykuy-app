@@ -27,6 +27,7 @@ const Home = () => {
     onSubmit,
     response,
     isLoading,
+    setValue,
   } = useHome();
 
   const { data: dataCity = [] } = response || {};
@@ -69,14 +70,19 @@ const Home = () => {
                     id='city'
                     value={value}
                     className='[&>div]:!rounded-2xl w-full'
-                    onChange={onChange}
+                    onChange={(event) => {
+                      const { target: { value } } = event;
+                      const { name = ''} = dataCity.find(({ id }: { id: number }) => id === value);
+                      setValue('cityName', name)
+                      onChange(event);
+                    }}
                     error={!!error}
                     disabled={isLoading}
                     autoFocus
                   >
                     {(dataCity || []).map(
                       ({ id, name }: { id: number; name: string }) => (
-                        <MenuItem value={name} key={id}>
+                        <MenuItem value={id} key={id}>
                           {name}
                         </MenuItem>
                       )
@@ -220,12 +226,7 @@ const Home = () => {
               <List className='bg-white min-w-72 max-w-96 overflow-x-auto !absolute transition-all'>
                 <ListItem disablePadding>
                   <ListItemButton>
-                    <ListItemText primary='Trash' />
-                  </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemText primary='Spam' />
+                    <ListItemText primary='-' />
                   </ListItemButton>
                 </ListItem>
               </List>
