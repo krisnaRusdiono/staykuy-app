@@ -11,9 +11,34 @@ import {
   Typography,
 } from '@mui/material';
 import useHome from './index.hooks';
+import { DatePicker } from '@mui/x-date-pickers';
+import { Controller, useForm } from 'react-hook-form';
+import { HomeSchema } from './index.types';
+import { zodResolver } from '@hookform/resolvers/zod';
+import homeSchema from './index.schemas';
+import { addDays, subDays } from 'date-fns';
 
 const Home = () => {
-  const { onClickSearch, toggleOpenHistory, openHistory } = useHome();
+  const { toggleOpenHistory, openHistory } = useHome();
+
+  const {
+    control,
+    handleSubmit,
+    watch,
+  } = useForm<HomeSchema>({
+    resolver: zodResolver(homeSchema),
+    defaultValues: {
+      city: '',
+      startDate: null,
+      endDate: null,
+      guest: 0,
+      room: 0,
+    }
+  })
+
+  const onSubmit = (data: HomeSchema) => {
+    console.log({ data })
+  }
 
   return (
     <div
@@ -24,41 +49,151 @@ const Home = () => {
     >
       <div className='w-screen h-screen bg-neutral-900 opacity-80' />
       <div className='absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 container flex flex-col gap-12'>
-        <Typography className='text-center text-white' variant='h4'>
+        <Typography
+          className='text-center text-white !font-semibold'
+          variant='h4'
+        >
           Staycation menjadi lebih mudah hanya dengan satu klik dan dapatkan
           banyak promo menarik!
         </Typography>
-        <div className='w-full flex flex-col gap-4'>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className='w-full flex flex-col gap-4'
+        >
           <div className='w-full bg-white rounded-xl flex gap-4 p-4'>
             <div className='flex flex-col gap-2 w-full h-inherit justify-between'>
               <Typography variant='body2'>
                 Pilih Kota/Nama Hotel/ Destinasi
               </Typography>
-              <TextField
-                className='[&>div]:!rounded-2xl w-full'
-                placeholder='Pilih nama hotel/destinasi/kota menginap'
+              <Controller
+                control={control}
+                name='city'
+                render={({
+                  field: { onChange, value, ref },
+                  fieldState: { error },
+                }) => (
+                  <TextField
+                    className='[&>div]:!rounded-2xl w-full'
+                    placeholder='Pilih nama hotel/destinasi/kota menginap'
+                    onChange={onChange}
+                    value={value}
+                    ref={ref}
+                    error={!!error}
+                    autoFocus
+                  />
+                )}
               />
             </div>
             <div className='flex flex-col gap-2 w-full h-inherit justify-between'>
               <Typography variant='body2'>Tanggal Menginap</Typography>
-              <TextField
-                className='[&>div]:!rounded-2xl w-full'
-                placeholder='Pilih tanggal menginap'
-              />
+              <div className='flex gap-2'>
+                <Controller
+                  control={control}
+                  name='startDate'
+                  render={({ field: { onChange, value, ref } }) => (
+                    <DatePicker
+                      label='Tanggal Mulai'
+                      maxDate={
+                        watch('endDate') &&
+                        subDays(watch('endDate') || new Date(), 1)
+                      }
+                      onChange={onChange}
+                      value={value}
+                      ref={ref}
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='endDate'
+                  render={({ field: { onChange, value, ref } }) => (
+                    <DatePicker
+                      label='Tanggal Selesai'
+                      minDate={
+                        watch('startDate') &&
+                        addDays(watch('startDate') || new Date(), 1)
+                      }
+                      onChange={onChange}
+                      value={value}
+                      ref={ref}
+                    />
+                  )}
+                />
+              </div>
             </div>
             <div className='flex flex-col gap-2 w-full h-inherit justify-between'>
               <Typography variant='body2'>Jumlah Tamu dan Kamar</Typography>
-              <TextField
-                className='[&>div]:!rounded-2xl w-full'
-                placeholder='Masukan jumlah tamu dan kamar'
-              />
+              <div className='flex gap-2'>
+                <Controller
+                  control={control}
+                  name='guest'
+                  render={({
+                    field: { onChange, value, ref },
+                    fieldState: { error },
+                  }) => (
+                    <TextField
+                      className='[&>div]:!rounded-2xl w-full'
+                      placeholder='Tamu'
+                      onChange={event => {
+                        console.log({ event });
+                        const { target } = event;
+                        const { value } = target;
+                        onChange({
+                          ...event,
+                          target: {
+                            ...target,
+                            value: Boolean(value)
+                              ? value.replace(/^0+/, '')
+                              : 0,
+                          },
+                        });
+                      }}
+                      value={value}
+                      ref={ref}
+                      error={!!error}
+                      type='number'
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='room'
+                  render={({
+                    field: { onChange, value, ref },
+                    fieldState: { error },
+                  }) => (
+                    <TextField
+                      className='[&>div]:!rounded-2xl w-full'
+                      placeholder='Kamar'
+                      onChange={event => {
+                        console.log({ event });
+                        const { target } = event;
+                        const { value } = target;
+                        onChange({
+                          ...event,
+                          target: {
+                            ...target,
+                            value: Boolean(value)
+                              ? value.replace(/^0+/, '')
+                              : 0,
+                          },
+                        });
+                      }}
+                      value={value}
+                      ref={ref}
+                      error={!!error}
+                      type='number'
+                    />
+                  )}
+                />
+              </div>
             </div>
             <div className='flex flex-col gap-2 justify-end'>
               <div />
               <Button
                 variant='contained'
                 className='h-14 text-nowrap w-40 self-end !rounded-2xl'
-                onClick={onClickSearch}
+                type='submit'
               >
                 Cari Hotel
               </Button>
@@ -95,7 +230,7 @@ const Home = () => {
               </List>
             )}
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
