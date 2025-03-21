@@ -195,11 +195,11 @@ const SearchResult = () => {
                 {(data || []).map((hotel: HotelData) => (
                   <div
                     key={hotel.id}
-                    className='flex gap-6 bg-white rounded-2xl drop-shadow-lg overflow-hidden transition-all hover:drop-shadow-xl hover:[&>:first-child>div]:scale-110'
+                    className='flex flex-col md:flex-row gap-6 bg-white rounded-2xl drop-shadow-lg overflow-hidden transition-all hover:drop-shadow-xl hover:[&>:first-child>div]:scale-110'
                   >
-                    <div className='w-96 h-full overflow-hidden flex'>
+                    <div className='w-full md:w-96 h-72 md:h-full overflow-hidden flex'>
                       <div
-                        className='w-96 bg-center bg-cover bg-no-repeat transition-all duration-300'
+                        className='w-full md:w-96 bg-center bg-cover bg-no-repeat transition-all duration-300'
                         style={{
                           backgroundImage: `url('${
                             Array.isArray(hotel.images)
@@ -209,7 +209,7 @@ const SearchResult = () => {
                         }}
                       />
                     </div>
-                    <div className='w-full p-4 pl-0 flex flex-col gap-2'>
+                    <div className='w-full p-4 md:pl-0 flex flex-col gap-2'>
                       <Button
                         variant='text'
                         disableRipple
@@ -254,7 +254,7 @@ const SearchResult = () => {
                           Bisa reschedule
                         </Button>
                       </div>
-                      <div className='flex gap-2 justify-end items-baseline'>
+                      <div className='flex gap-2 justify-end items-baseline mt-8 md:mt-4'>
                         <Typography
                           color='primary'
                           variant='h6'
