@@ -144,7 +144,6 @@ const Home = () => {
                       className='[&>div]:!rounded-2xl w-full'
                       placeholder='Tamu'
                       onChange={event => {
-                        console.log({ event });
                         const { target } = event;
                         const { value } = target;
                         onChange({
@@ -175,7 +174,6 @@ const Home = () => {
                       className='[&>div]:!rounded-2xl w-full'
                       placeholder='Kamar'
                       onChange={event => {
-                        console.log({ event });
                         const { target } = event;
                         const { value } = target;
                         onChange({
