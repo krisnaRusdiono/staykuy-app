@@ -40,9 +40,9 @@ const Home = () => {
       }}
     >
       <div className='w-screen h-screen bg-neutral-900 opacity-80' />
-      <div className='absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 container flex flex-col gap-12 p-4'>
+      <div className='absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 container flex flex-col gap-12 p-4 pt-24 md:pt-4'>
         <Typography
-          className='text-center text-white !font-semibold'
+          className='text-center text-white !font-semibold !text-xl md:!text-3xl'
           variant='h4'
         >
           Staycation menjadi lebih mudah hanya dengan satu klik dan dapatkan
@@ -52,7 +52,7 @@ const Home = () => {
           onSubmit={handleSubmit(onSubmit)}
           className='w-full flex flex-col gap-4'
         >
-          <div className='w-full bg-white rounded-xl flex flex-wrap lg:flex-nowrap gap-4 p-4'>
+          <div className='w-full bg-white rounded-xl flex flex-wrap lg:flex-nowrap gap-4 p-4 justify-end'>
             <div className='flex flex-col gap-2 w-full h-inherit justify-between'>
               <Typography variant='body2'>
                 Pilih Kota/Nama Hotel/ Destinasi
@@ -99,6 +99,7 @@ const Home = () => {
                   name='startDate'
                   render={({ field: { onChange, value, ref } }) => (
                     <DatePicker
+                    className='w-full'
                       label='Tanggal Mulai'
                       maxDate={
                         watch('endDate') &&
@@ -115,6 +116,7 @@ const Home = () => {
                   name='endDate'
                   render={({ field: { onChange, value, ref } }) => (
                     <DatePicker
+                    className='w-full'
                       label='Tanggal Selesai'
                       minDate={
                         watch('startDate') &&
