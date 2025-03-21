@@ -24,7 +24,7 @@ const Detail = () => {
     <AppContainer className='flex flex-col gap-4 py-4'>
       <div className='flex flex-col gap-6 h-auto min-h-screen pt-20'>
         <DetailSearch />
-        <div className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-4 p-4'>
           <div className='flex flex-col gap-4'>
             <div className='flex flex-col gap-2'>
               <div className='flex gap-4'>
@@ -75,6 +75,9 @@ const Detail = () => {
             value={valueTabs}
             onChange={handleTabsChange}
             aria-label='basic tabs example'
+            classes={{
+              list: 'overflow-auto'
+            }}
           >
             <Tab
               label='Tentang Hotel'
