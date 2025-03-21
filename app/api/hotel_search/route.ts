@@ -29,8 +29,6 @@ const GET = async (req: NextRequest) => {
     page_size: 10,
   };
 
-  console.log(stars);
-
   const response = await fetch(`${BASE_API}${HOTEL_SEARCH}?${createQueryParams(objParams)}`, {
     method: 'GET',
   });
